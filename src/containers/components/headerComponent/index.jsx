@@ -26,7 +26,7 @@ class Header extends React.Component {
                                 type={'left'}
                                 size={'lg'}
                                 color={'rgba(0,0,0,0.65)'}
-                                onClick={this.props.onLeftClick || window.history.goBack}
+                                onClick={this.props.onLeftClick || window.appHistory.goBack}
                             />
                             <Icon type={'cross'}
                                 size={'lg'}
