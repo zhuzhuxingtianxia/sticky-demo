@@ -1,13 +1,34 @@
 .homepage {
+    height: 100vh;
+    // overflow: hidden;
     display:flex;
     flex:1;
     flex-direction: column;
     .wrap_content {
+        // overflow: hidden;
         flex: 1;
         justify-content: center;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: coral;
+        
+        .headerBanner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height:230px;
+            background:red;
+            > div {
+                font-size: 18px;
+                color: white;
+            }
+        }
+        .renderItem {
+            // height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }

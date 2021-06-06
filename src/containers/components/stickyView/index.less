@@ -1,6 +1,6 @@
-.ft_detail {
-    height: 100vh;
+.ft_stickyView {
     display: flex;
+    flex: 1;
     flex-direction: column;
     overflow: hidden;
     &__ft_body {
@@ -8,11 +8,6 @@
         flex: 1;
         flex-direction: column;
         overflow-y: auto;
-        .card_header {
-            display: flex;
-            height: 200px;
-            background-color: coral;
-        }
         .card_modules {
             .card_sticky {
                 position: sticky;
@@ -59,12 +54,6 @@
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                > div {
-                    height: 200px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                }
             }
 
         }

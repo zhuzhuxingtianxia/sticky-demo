@@ -1,65 +1,7 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Tabs } from "antd-mobile";
 import $ from 'jquery'
-import { Header } from "@com";
 import './index.less';
-
-const getRandomColor = () => {
-    return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-}
-
-const ftDatas = [
-    {
-        key:'key1',
-        title:'商品分类1',
-        color: getRandomColor()
-    },
-    {
-        key:'key2',
-        title:'商品分类2',
-        color: getRandomColor()
-    },
-    {
-        key:'key3',
-        title:'商品分类3',
-        color: getRandomColor()
-    },
-    {
-        key:'key4',
-        title:'商品分类4',
-        color: getRandomColor()
-    },
-    {
-        key:'key5',
-        title:'商品分类5',
-        color: getRandomColor()
-    },
-    {
-        key:'key6',
-        title:'商品分类6',
-        color: getRandomColor()
-    },
-    {
-        key:'key7',
-        title:'商品分类7',
-        color: getRandomColor()
-    },
-    {
-        key:'key8',
-        title:'商品分类1',
-        color: getRandomColor()
-    },
-    {
-        key:'key8',
-        title:'商品分类1',
-        color: getRandomColor()
-    },
-    {
-        key:'key9',
-        title:'商品分类9',
-        color: getRandomColor()
-    },
-]
 
 let isDragging = false
 let isClick = false
@@ -67,10 +9,27 @@ let timeout = null;
 let pageY = 0
 
 const StickyView = (props) => {
-
+    
+    const { datas=[],page=4 } = props
     const [selectPage,setSelectPage] = useState(0)
 
-    const onTabClick = (index) => {
+    useEffect(() => {
+        const ftBody = document.getElementById('ftbody')
+        let parentNode = ftBody.parentNode.parentNode;
+        while (parentNode && parentNode.nodeName !== 'BODY') {
+            if (parentNode.parentNode && parentNode.parentNode.nodeName === 'BODY') {
+                
+            }else {
+                parentNode.style['overflow'] = 'hidden'
+                parentNode.style['justify-content'] = 'inherit'
+                parentNode.style['align-items'] = 'inherit'
+            }
+            
+            parentNode = parentNode.parentNode;
+        }
+    },[])
+
+    const onTabClick = (tab,index) => {
         isClick = true
         if(timeout) {
             clearTimeout(timeout)
@@ -82,7 +41,7 @@ const StickyView = (props) => {
         setSelectPage(index)
 
         let mode = 0
-        if(mode == 1) {
+        if(mode === 1) {
             const contentNode = document.getElementById('content')
             const domNode = contentNode.childNodes[index]
             domNode.scrollIntoView({behavior: 'smooth', block: 'start'})
@@ -90,18 +49,18 @@ const StickyView = (props) => {
             const contentNode = document.getElementById('content')
             const domNode = document.getElementById('ftbody')
             const stickyNode = document.getElementsByClassName('card_sticky')[0]
-
-            let tmpIndx = index;
+            
+            let tmpIndx = 0;
             let offsetY = contentNode.offsetTop - stickyNode.clientHeight;
-            while(tmpIndx > 0){
+            while(tmpIndx < index){
                 offsetY += contentNode.childNodes[tmpIndx].clientHeight;
-                tmpIndx--
+                tmpIndx++
             }
 
-            if(mode == 2) {
+            if(mode === 2) {
                 //无动画
                 domNode.scrollTo(0,offsetY)
-            }else if(mode == 3){
+            }else if(mode === 3){
                 //浏览器有动画，iOS无动画
                 
             }else {
@@ -124,14 +83,20 @@ const StickyView = (props) => {
                     offsetY += contentNode.childNodes[selectIndex].clientHeight;
                 }
             } 
-            if(selectIndex != selectPage) {
+            if(selectIndex !== selectPage) {
                 setSelectPage(selectIndex)
             }
         }
     }
 
-    const onTouchMove = () => {
+    const onTouchMove = (e) => {
         isDragging = true
+        
+        if (pageY > e.touches[0].pageY) {
+            console.log('👆')
+        }else if(pageY < e.touches[0].pageY) {
+            console.log('👇')
+        }
     }
 
     const onTouchEnd = () => {
@@ -139,20 +104,19 @@ const StickyView = (props) => {
     }
 
     return (
-        <div className={'ft_detail'}>
-            <Header title={'首页'}/>
-            <div className={'ft_detail__ft_body'}
+        <div className={'ft_stickyView'}>
+            <div className={'ft_stickyView__ft_body'}
                 id={'ftbody'}
                 onScroll={onScroll}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
             >
-                <div className={'card_header'}></div>
+                { props.header }
                 <div className={'card_modules'}>
                     <div className={'card_sticky'}>
-                        <Tabs tabs={ftDatas}
+                        <Tabs tabs={datas}
                             page={selectPage}
-                            renderTabBar={props => <Tabs.DefaultTabBar {...props}/>}
+                            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={page}/>}
                             onTabClick={onTabClick}
                         ></Tabs>
                     </div>
@@ -160,12 +124,12 @@ const StickyView = (props) => {
                         id={'content'}
                     >
                         {
-                            ftDatas &&
-                            ftDatas.map((card,index) => {
+                            datas &&
+                            datas.map((card,index) => {
                                 return (
-                                    <div key={index} id={card.key} style={{background:card.color}}>
-                                        {card.title}
-                                    </div>
+                                    <Fragment key={index}>
+                                        { props.renderItem ? props.renderItem(card,index): <div></div> }
+                                    </Fragment>
                                 )
                             })
                         }
