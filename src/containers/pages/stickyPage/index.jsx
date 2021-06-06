@@ -7,57 +7,70 @@ import './index.less';
 const getRandomColor = () => {
     return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 }
+const getRandomHeight = () => {
+    return  (Math.floor(Math.random() * 200)) + 100;
+}
 
 const ftDatas = [
     {
         key:'key1',
         title:'商品分类1',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key2',
         title:'商品分类2',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key3',
         title:'商品分类3',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key4',
         title:'商品分类4',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key5',
         title:'商品分类5',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key6',
         title:'商品分类6',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key7',
         title:'商品分类7',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key8',
-        title:'商品分类1',
-        color: getRandomColor()
-    },
-    {
-        key:'key8',
-        title:'商品分类1',
-        color: getRandomColor()
+        title:'商品分类8',
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
     {
         key:'key9',
         title:'商品分类9',
-        color: getRandomColor()
+        color: getRandomColor(),
+        height:getRandomHeight()
+    },
+    {
+        key:'key10',
+        title:'商品分类10',
+        color: getRandomColor(),
+        height:getRandomHeight()
     },
 ]
 
@@ -66,11 +79,11 @@ let isClick = false
 let timeout = null;
 let pageY = 0
 
-const StickyView = (props) => {
+const StickyPage = (props) => {
 
     const [selectPage,setSelectPage] = useState(0)
 
-    const onTabClick = (index) => {
+    const onTabClick = (tab,index) => {
         isClick = true
         if(timeout) {
             clearTimeout(timeout)
@@ -82,7 +95,7 @@ const StickyView = (props) => {
         setSelectPage(index)
 
         let mode = 0
-        if(mode == 1) {
+        if(mode === 1) {
             const contentNode = document.getElementById('content')
             const domNode = contentNode.childNodes[index]
             domNode.scrollIntoView({behavior: 'smooth', block: 'start'})
@@ -90,18 +103,18 @@ const StickyView = (props) => {
             const contentNode = document.getElementById('content')
             const domNode = document.getElementById('ftbody')
             const stickyNode = document.getElementsByClassName('card_sticky')[0]
-
-            let tmpIndx = index;
+            
+            let tmpIndx = 0;
             let offsetY = contentNode.offsetTop - stickyNode.clientHeight;
-            while(tmpIndx > 0){
+            while(tmpIndx < index){
                 offsetY += contentNode.childNodes[tmpIndx].clientHeight;
-                tmpIndx--
+                tmpIndx++
             }
 
-            if(mode == 2) {
+            if(mode === 2) {
                 //无动画
                 domNode.scrollTo(0,offsetY)
-            }else if(mode == 3){
+            }else if(mode === 3){
                 //浏览器有动画，iOS无动画
                 
             }else {
@@ -124,14 +137,20 @@ const StickyView = (props) => {
                     offsetY += contentNode.childNodes[selectIndex].clientHeight;
                 }
             } 
-            if(selectIndex != selectPage) {
+            if(selectIndex !== selectPage) {
                 setSelectPage(selectIndex)
             }
         }
     }
 
-    const onTouchMove = () => {
+    const onTouchMove = (e) => {
         isDragging = true
+        
+        if (pageY > e.touches[0].pageY) {
+            console.log('👆')
+        }else if(pageY < e.touches[0].pageY) {
+            console.log('👇')
+        }
     }
 
     const onTouchEnd = () => {
@@ -140,7 +159,7 @@ const StickyView = (props) => {
 
     return (
         <div className={'ft_detail'}>
-            <Header title={'首页'}/>
+            <Header title={'滑动置顶'}/>
             <div className={'ft_detail__ft_body'}
                 id={'ftbody'}
                 onScroll={onScroll}
@@ -152,7 +171,7 @@ const StickyView = (props) => {
                     <div className={'card_sticky'}>
                         <Tabs tabs={ftDatas}
                             page={selectPage}
-                            renderTabBar={props => <Tabs.DefaultTabBar {...props}/>}
+                            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4}/>}
                             onTabClick={onTabClick}
                         ></Tabs>
                     </div>
@@ -163,7 +182,8 @@ const StickyView = (props) => {
                             ftDatas &&
                             ftDatas.map((card,index) => {
                                 return (
-                                    <div key={index} id={card.key} style={{background:card.color}}>
+                                    <div key={index} id={card.key} 
+                                        style={{background:card.color,height:card.height}}>
                                         {card.title}
                                     </div>
                                 )
@@ -177,4 +197,4 @@ const StickyView = (props) => {
 
 }
 
-export default StickyView;
+export default StickyPage;

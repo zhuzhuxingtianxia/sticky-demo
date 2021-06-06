@@ -12,6 +12,11 @@ const Detail = loadable(() => import('@pages/detail/index'),{
     fallback:<Loading />
 });
 
+const StickyPage = loadable(() => import('@pages/stickyPage/index'),{
+    fallback:<Loading />
+});
+
+
 
 
 const Router = (props) => {
@@ -20,6 +25,7 @@ const Router = (props) => {
         <Switch>
             <Route exact strict path="/" component={Home}/>
             <Route exact path="/detail" component={Detail}/>
+            <Route exact path="/stickyPage" component={StickyPage}/>
 
             <Route component={NoMatch}/>
         </Switch>

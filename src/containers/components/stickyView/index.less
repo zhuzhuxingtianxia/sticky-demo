@@ -1,0 +1,72 @@
+.ft_detail {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    &__ft_body {
+        position: relative;
+        flex: 1;
+        flex-direction: column;
+        overflow-y: auto;
+        .card_header {
+            display: flex;
+            height: 200px;
+            background-color: coral;
+        }
+        .card_modules {
+            .card_sticky {
+                position: sticky;
+                z-index: 1998;
+                top: 0;
+                background: white;
+                padding: 5px 0;
+                display: flex;
+                flex-direction: row;
+                overflow-x: auto;
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+                .am-tabs-tab-bar-wrap {
+                    .am-tabs-default-bar {
+                        padding: 0 5px;
+                        .am-tabs-default-bar-content {
+
+                            .am-tabs-default-bar-tab {
+                                overflow: hidden;
+                                white-space: nowrap;
+                                color: #22385a;
+                                font-size: 16px;
+                                &::after {
+                                    content: none;
+                                }
+                                &.am-tabs-default-bar-tab-active {
+                                    color: #0c59ff;
+                                    font-weight: bold;
+                                    font-size: 18px;
+                                }
+                            }
+
+                            .am-tabs-default-bar-underline {
+                                border:1px #0c59ff solid;
+                            }
+
+                        }
+                    }
+                }
+            }
+
+            &__content {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                > div {
+                    height: 200px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+        }
+    }
+}

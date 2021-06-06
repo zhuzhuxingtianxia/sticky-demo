@@ -12,6 +12,9 @@ const Home = (props={}) => {
                 <div onClick={()=>{
                     history.push('/detail')
                  }}>goDetail</div>
+                 <div style={{padding:50}} onClick={()=>{
+                    history.push('/stickyPage')
+                 }}>stickyPage</div>
             </div>
             
         </div>
