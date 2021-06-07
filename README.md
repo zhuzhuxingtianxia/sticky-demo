@@ -45,3 +45,11 @@ That will permanently disable this message but you might encounter other issues.
 
 
 ## `npm build`
+
+构建应用
+
+## 遇到的问题
+
+1. 在点击tab切换至对应元素时，移动端无动画效果。最后使用jquery的`animate`实现，最终目标是不依赖于第三方库实现，那么如何不使用jquery来实现呢？
+
+2. Tabs依赖于`antd-mobile`，界面一行item的多少则是固定写死的，如何设置动态显示item的数量呢？

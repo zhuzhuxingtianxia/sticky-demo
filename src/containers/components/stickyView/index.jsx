@@ -3,6 +3,7 @@ import { Tabs } from "antd-mobile";
 import $ from 'jquery'
 import './index.less';
 
+let cacheActiveIndex = 0
 let isDragging = false
 let isClick = false
 let timeout = null;
@@ -11,7 +12,7 @@ let pageY = 0
 const StickyView = (props) => {
     
     const { datas=[],page=4 } = props
-    const [selectPage,setSelectPage] = useState(0)
+    const [selectPage,setSelectPage] = useState(cacheActiveIndex)
 
     useEffect(() => {
         const ftBody = document.getElementById('ftbody')
@@ -27,6 +28,19 @@ const StickyView = (props) => {
             
             parentNode = parentNode.parentNode;
         }
+
+        if (cacheActiveIndex > 0) {
+            isClick = true
+            if(timeout) {
+                clearTimeout(timeout)
+            }
+            timeout = setTimeout(()=>{
+                isClick = false
+            },500)
+            //从详情页返回滚动到原来的位置
+            scrollToPostion(cacheActiveIndex,2)
+        }
+
     },[])
 
     const onTabClick = (tab,index) => {
@@ -38,9 +52,15 @@ const StickyView = (props) => {
             isClick = false
         },500)
 
+        cacheActiveIndex = index;
         setSelectPage(index)
 
-        let mode = 0
+        scrollToPostion(index)
+
+    }
+
+    const scrollToPostion = (index,mode=0) => {
+        
         if(mode === 1) {
             const contentNode = document.getElementById('content')
             const domNode = contentNode.childNodes[index]
@@ -73,7 +93,6 @@ const StickyView = (props) => {
             }
 
         }
-
     }
 
     const onScroll = (e) => {
@@ -89,6 +108,7 @@ const StickyView = (props) => {
                 }
             } 
             if(selectIndex !== selectPage) {
+                cacheActiveIndex = selectIndex
                 setSelectPage(selectIndex)
             }
         }
