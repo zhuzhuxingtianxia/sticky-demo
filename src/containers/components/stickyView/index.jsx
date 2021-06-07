@@ -102,6 +102,7 @@ const StickyView = (props) => {
         }else if(pageY < e.touches[0].pageY) {
             console.log('👇')
         }
+        pageY = e.touches[0].pageY;
     }
 
     const onTouchEnd = () => {
