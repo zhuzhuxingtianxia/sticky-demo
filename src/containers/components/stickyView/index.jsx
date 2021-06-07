@@ -62,7 +62,12 @@ const StickyView = (props) => {
                 domNode.scrollTo(0,offsetY)
             }else if(mode === 3){
                 //浏览器有动画，iOS无动画
-                
+                const scrollOption = {
+                    top:offsetY,
+                    left:0,
+                    behavior:'smooth'
+                }
+                domNode.scrollTo(0,offsetY)
             }else {
                 $('#ftbody').animate({scrollTop: offsetY}, 300)
             }
