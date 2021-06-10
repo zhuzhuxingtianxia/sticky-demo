@@ -29,7 +29,7 @@ npm install babel-plugin-import --save-dev
 修改`config-overrides.js`文件
 
 
-### `npm start`
+## npm start
 
 ```
 Don't try to install it manually: your package manager does it automatically.
@@ -48,7 +48,7 @@ That will permanently disable this message but you might encounter other issues.
 
 
 
-## `npm build`
+## npm build
 
 构建应用
 
