@@ -87,7 +87,7 @@ const StickyView = (props) => {
                     left:0,
                     behavior:'smooth'
                 }
-                domNode.scrollTo(0,offsetY)
+                domNode.scrollTo(scrollOption)
             }else {
                 $('#ftbody').animate({scrollTop: offsetY}, 300)
             }
