@@ -5,9 +5,9 @@ import './index.less';
 
 let cacheActiveIndex = 0
 let isDragging = false
+let pageY = 0
 let isClick = false
 let timeout = null;
-let pageY = 0
 
 const StickyView = (props) => {
     
