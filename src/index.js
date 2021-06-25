@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Router, Route } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import '@config/axios'
 import './index.css';
 // import APP from './App'
 import  Root from '@pages/root';
