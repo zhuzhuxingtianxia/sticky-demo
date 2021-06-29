@@ -83,7 +83,7 @@ const Home = (props={}) => {
 
     return (
         <div className='homepage'>
-            <Header>{'首页'}</Header>
+            <Header>{'商品分类商品分类商品分类s首页'}</Header>
             <div className='wrap_content'>
                 <StickyView 
                     datas={ftDatas}

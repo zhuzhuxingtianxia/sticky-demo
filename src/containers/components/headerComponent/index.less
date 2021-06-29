@@ -15,12 +15,46 @@
             font-size: 18px;
             font-weight: bold;
         }
-
+    }
+    
+    &__mini {
+        height: 44px;
+        padding-top: 20px;
+        box-shadow: 0 10px 10px hsla(0,0%,95.7%,0.6);
+        .am-navbar-left {
+            flex: inherit;
+            padding-left: 0;
+            width: 90px;
+        }
+        .am-navbar-title {
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 44px;
+            display: inline-block;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: center;
+        }
+        .am-navbar-right {
+            flex: inherit;
+            margin-right: 10px;
+            width: 80px;
+            .mini_rightIcons {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 28px;
+                padding: 0 10px;
+                border-radius: 15px;
+                border: gainsboro solid 0.5px;
+            }
+        }
+        
     }
 
     //华为p40-780，iPhonex-812,iphonePlus-736
     @media screen and (min-height: 780px) {
-        &__navBar {
+        &__navBar, &__mini {
             padding-top: 44px;
         }
     }

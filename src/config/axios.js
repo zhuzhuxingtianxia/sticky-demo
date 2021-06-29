@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 function localProxy(config) {
-    const url = location.href
+    const url = window.location.href
     if (process.env.NODE_ENV === 'development' && url.indexOf('http://localhost') > -1 && navigator.vendor.indexOf('Google') > -1) {
         let stg = 1
         config.url = `http://localhost:3000/proxyStg${stg}${config.url}`
