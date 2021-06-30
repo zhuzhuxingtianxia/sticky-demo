@@ -44,16 +44,20 @@ class Header extends React.Component {
     rightContent = () => {
         let rightContent = []
         if (this.props.mini) {
-            const com = <div className={`mini_rightIcons${this.props.onlyClose ? ' onlyClose' : ''}`}>
-                {
-                    this.props.onlyClose === false && 
-                    <>
-                        <Icon type='ellipsis' size='sm' color={'#000'} onClick={this.popOver}/>
-                        <div style={{background:'gainsboro',width:1,height:20,margin:'0 5px'}}></div>
-                    </>
-                }
-                <Icon type='cross-circle' size='sm' color={'#000'} onClick={this.appClose}/>
-            </div>
+            const com = (
+                <div key={'mini_right'} 
+                    className={`mini_rightIcons${this.props.onlyClose ? ' onlyClose' : ''}`}
+                >
+                    {
+                        this.props.onlyClose === false && 
+                        <>
+                            <Icon type='ellipsis' size='sm' color={'#000'} onClick={this.popOver}/>
+                            <div style={{background:'gainsboro',width:1,height:20,margin:'0 5px'}}></div>
+                        </>
+                    }
+                    <Icon type='cross-circle' size='sm' color={'#000'} onClick={this.appClose}/>
+                </div>
+            )
             rightContent = [com]
         }else {
             rightContent = this.props.rightContent || []
