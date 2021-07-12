@@ -101,7 +101,13 @@ const StickyView = (props) => {
             let selectIndex = 0
             if(e.target.scrollTop > contentNode.offsetTop){
                 const stickyNode = document.getElementsByClassName('card_sticky')[0]
-                let offsetY = contentNode.offsetTop - stickyNode.clientHeight + contentNode.childNodes[selectIndex].clientHeight;
+                let offsetY = 0
+                if (stickyNode) {
+                    offsetY = contentNode.offsetTop - stickyNode.clientHeight + contentNode.childNodes[selectIndex].clientHeight;
+                }else {
+                    offsetY = contentNode.offsetTop + contentNode.childNodes[selectIndex].clientHeight;
+                }
+                 
                 while(e.target.scrollTop > offsetY) {
                     selectIndex += 1
                     offsetY += contentNode.childNodes[selectIndex].clientHeight;
