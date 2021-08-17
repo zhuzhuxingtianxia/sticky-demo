@@ -173,4 +173,5 @@ const StickyView = (props) => {
 
 }
 
+StickyView.cacheActiveIndex = cacheActiveIndex;
 export default StickyView;
