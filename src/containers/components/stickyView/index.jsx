@@ -68,11 +68,11 @@ const StickyView = (props) => {
         }else {
             const contentNode = document.getElementById('content')
             const domNode = document.getElementById('ftbody')
-            const stickyNode = document.getElementsByClassName('card_sticky')[0]
+            const stickyNode = document.getElementsByClassName('card_sticky')[0] || {clientHeight: 0}
             
             let tmpIndx = 0;
             let offsetY = contentNode.offsetTop - stickyNode.clientHeight;
-            while(tmpIndx < index){
+            while(tmpIndx < index && contentNode.childNodes.length > 0){
                 offsetY += contentNode.childNodes[tmpIndx].clientHeight;
                 tmpIndx++
             }
