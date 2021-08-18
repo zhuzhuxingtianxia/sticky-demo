@@ -3,7 +3,7 @@ import { Tabs } from "antd-mobile";
 import $ from 'jquery'
 import './index.less';
 
-let cacheActiveIndex = 0
+let cacheActiveObjc = {}
 let isDragging = false
 let pageY = 0
 let isClick = false
@@ -11,8 +11,14 @@ let timeout = null;
 
 const StickyView = (props) => {
     
-    const { datas=[],page=4 } = props
-    const [selectPage,setSelectPage] = useState(cacheActiveIndex)
+    const { datas=[],page=4,stickyKey='stickyKey' } = props
+
+    const cacheActiveIndex = cacheActiveObjc[stickyKey]
+    if (cacheActiveIndex == undefined) {
+        cacheActiveObjc[stickyKey] = 0
+    }
+
+    const [selectPage,setSelectPage] = useState(cacheActiveObjc[stickyKey])
 
     useEffect(() => {
         const ftBody = document.getElementById('ftbody')
@@ -29,7 +35,7 @@ const StickyView = (props) => {
             parentNode = parentNode.parentNode;
         }
 
-        if (cacheActiveIndex > 0) {
+        if (cacheActiveObjc[stickyKey] > 0) {
             isClick = true
             if(timeout) {
                 clearTimeout(timeout)
@@ -38,7 +44,7 @@ const StickyView = (props) => {
                 isClick = false
             },500)
             //从详情页返回滚动到原来的位置
-            scrollToPostion(cacheActiveIndex,2)
+            scrollToPostion(cacheActiveObjc[stickyKey],2)
         }
 
     },[])
@@ -52,7 +58,7 @@ const StickyView = (props) => {
             isClick = false
         },500)
 
-        cacheActiveIndex = index;
+        cacheActiveObjc[stickyKey] = index;
         setSelectPage(index)
 
         scrollToPostion(index)
@@ -114,7 +120,7 @@ const StickyView = (props) => {
                 }
             } 
             if(selectIndex !== selectPage) {
-                cacheActiveIndex = selectIndex
+                cacheActiveObjc[stickyKey] = selectIndex
                 setSelectPage(selectIndex)
             }
         }
@@ -173,5 +179,4 @@ const StickyView = (props) => {
 
 }
 
-StickyView.cacheActiveIndex = cacheActiveIndex;
 export default StickyView;
