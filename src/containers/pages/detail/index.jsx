@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Header } from "@com";
 import './index.less';
 
 const Detail = (props={}) => {
+
+    useEffect(()=>{
+
+        return ()=>{
+            if (window.appHistory.action == 'POP') {
+                console.log('卸载界面')
+            }else {
+                console.log('界面跳转')
+            }
+        }
+    },[])
 
     return (
         <div className='detail_page'>
