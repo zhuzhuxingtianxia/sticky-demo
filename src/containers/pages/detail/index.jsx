@@ -7,7 +7,7 @@ const Detail = (props={}) => {
     useEffect(()=>{
 
         return ()=>{
-            if (window.appHistory.action == 'POP') {
+            if (props.history.action == 'POP') {
                 console.log('卸载界面')
             }else {
                 console.log('界面跳转')
