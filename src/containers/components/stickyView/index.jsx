@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Fragment, useState, useEffect } from 'react';
 import { Tabs } from "antd-mobile";
 import $ from 'jquery'
@@ -14,7 +15,7 @@ const StickyView = (props) => {
     const { datas=[],page=4,stickyKey='stickyKey' } = props
 
     const cacheActiveIndex = cacheActiveObjc[stickyKey]
-    if (cacheActiveIndex == undefined) {
+    if (cacheActiveIndex === undefined) {
         cacheActiveObjc[stickyKey] = 0
     }
 

@@ -3,12 +3,14 @@ const {
     fixBabelImports, 
     addLessLoader,
     addDecoratorsLegacy,
-    addWebpackResolve
+    addWebpackResolve,
+    disableEsLint
 } = require('customize-cra');
 
 const path = require('path')
 
 module.exports = override(
+    disableEsLint(),
     fixBabelImports('import', {
         libraryName: 'antd-mobile',
         style: true,

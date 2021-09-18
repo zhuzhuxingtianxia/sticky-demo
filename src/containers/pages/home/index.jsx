@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from "react-router-dom";
 import { Header } from "@com";
 import StickyView from '../../components/stickyView/index'
+import HeaderBanner from '../headerBanner/index'
 import './index.less';
 
 const getRandomColor = () => {
@@ -88,11 +89,9 @@ const Home = (props={}) => {
                 <StickyView 
                     datas={ftDatas}
                     header={
-                        <div className='headerBanner'>
-                            <div style={{padding:50}} onClick={()=>{
-                                history.push('/stickyPage')
-                            }}>stickyPage</div>
-                        </div>
+                        <HeaderBanner onScrollEnd={()=>{
+                            history.push('/stickyPage')
+                        }}/>
                     }
                     renderItem={(item,idx) => {
                         return (
