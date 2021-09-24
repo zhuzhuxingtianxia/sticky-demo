@@ -9,6 +9,7 @@ let isDragging = false
 let pageY = 0
 let isClick = false
 let timeout = null;
+let _offsetY = {}
 
 const StickyView = (props) => {
     
@@ -17,6 +18,7 @@ const StickyView = (props) => {
     const cacheActiveIndex = cacheActiveObjc[stickyKey]
     if (cacheActiveIndex === undefined) {
         cacheActiveObjc[stickyKey] = 0
+        _offsetY[stickyKey] = 0
     }
 
     const [selectPage,setSelectPage] = useState(cacheActiveObjc[stickyKey])
@@ -35,7 +37,7 @@ const StickyView = (props) => {
             
             parentNode = parentNode.parentNode;
         }
-
+        
         if (cacheActiveObjc[stickyKey] > 0) {
             isClick = true
             if(timeout) {
@@ -46,6 +48,18 @@ const StickyView = (props) => {
             },500)
             //从详情页返回滚动到原来的位置
             scrollToPostion(cacheActiveObjc[stickyKey],2)
+        }else if(_offsetY[stickyKey] > 0) {
+            setTimeout(()=>{
+                ftBody.scrollTo(0,_offsetY[stickyKey])
+            },10)
+            
+        }
+
+        return ()=> {
+            if (window.appHistory.acction == 'POP') {
+                cacheActiveObjc[stickyKey] = undefined
+                _offsetY[stickyKey] = 0
+            }
         }
 
     },[])
@@ -99,7 +113,10 @@ const StickyView = (props) => {
                 $('#ftbody').animate({scrollTop: offsetY}, 300)
             }
 
+            _offsetY[stickyKey] = offsetY
+            
         }
+
     }
 
     const onScroll = (e) => {
@@ -125,6 +142,9 @@ const StickyView = (props) => {
                 setSelectPage(selectIndex)
             }
         }
+        
+        _offsetY[stickyKey] = e.target.scrollTop
+
     }
 
     const onTouchMove = (e) => {

@@ -17,7 +17,7 @@ const HeaderBanner = (props={})=> {
         setTimeout(()=>{
             const list = [image1,image2,image3,image1,image2,image3]
             setDatas(list)
-        },100)
+        },0)
     },[])
 
     const onScrollEnd = (frame={}) => {
