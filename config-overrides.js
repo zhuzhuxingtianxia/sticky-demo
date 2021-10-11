@@ -4,7 +4,7 @@ const {
     addLessLoader,
     addDecoratorsLegacy,
     addWebpackResolve,
-    disableEsLint
+    disableEsLint //脚本4.x以上无效
 } = require('customize-cra');
 
 const path = require('path')
