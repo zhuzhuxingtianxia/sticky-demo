@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, 
+    useReducer, useState, 
+    useContext, useCallback,
+     useLayoutEffect, useMemo } from 'react';
 import { useHistory } from "react-router-dom";
 import { Header } from "@com";
 import StickyView from '../../components/stickyView/index'
