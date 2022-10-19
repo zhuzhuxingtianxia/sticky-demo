@@ -19,6 +19,10 @@ class Header extends React.Component {
        
     }
 
+    UNSAFE_componentWillReceiveProps(nextProps) {
+
+    }
+
     appClose = () => {
         console.log('appClose')
         if(this.props.appClose) {
