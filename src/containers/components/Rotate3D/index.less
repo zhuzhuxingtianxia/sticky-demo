@@ -11,41 +11,44 @@
     /* 为了方便观察让3D舞台转动角度 */
     // transform: rotateX(330deg) rotateY(-30deg) rotateZ(180deg);
     transform: rotateX(-30deg) rotateY(60deg);
+    // 旋转
     animation: play_rotate 20s infinite linear;
-
+    // 摇晃
+    // animation: play_shake 3s forwards;
     .face-6 {
         position: absolute;
         width: 100%;
+        overflow: hidden;
         &.front {
             /* 第一个面往前走 */
-            transform: translateZ(90);
+            transform: translateZ(90px);
         }
 
         &.back {
             /* 第二个面往后走 */
-            transform: translateZ(-90) rotateY(180deg);
+            transform: translateZ(-90px) rotateY(180deg);
         }
 
         &.up {
             /* 先往上位移150*$rem/10  再绕着X轴转动90deg */
 
-            transform: translateY(-90) rotateX(90deg);
+            transform: translateY(-90px) rotateX(90deg);
         }
 
         &.down {
             /* 先往下位移150*$rem/10,再绕着X轴转动90deg */
             
-            transform: translateY(90) rotateX(-90deg);
+            transform: translateY(90px) rotateX(-90deg);
         }
 
         &.left {
             /* 先往左位移150*$rem/10 , 再绕着Y轴转动90deg */
-            transform: translateX(-90) rotateY(-90deg);
+            transform: translateX(-90px) rotateY(-90deg);
         }
 
         &.right {
             /* 先往右侧位移150*$rem/10,再绕着Y轴转动90deg */
-            transform: translateX(90) rotateY(90deg);
+            transform: translateX(90px) rotateY(90deg);
         }
 
         > img {
@@ -62,5 +65,18 @@
             transform: rotateX(-25deg) rotateY(420deg);
         }
     }
+    @keyframes play_shake {
+        0% {
+          transform: rotateX(330deg) rotateY(-30deg) rotateZ(180deg);
+        }
+        50% {
+          transform: rotateX(-30deg) rotateY(60deg);
+        }
+  
+        100% {
+          transform: rotateX(-30deg) rotateY(60deg);
+        }
+      }
+  
 
 }

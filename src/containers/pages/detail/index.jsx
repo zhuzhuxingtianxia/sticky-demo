@@ -2,6 +2,7 @@
 import React, { useEffect, useReducer } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Header } from "@com";
+import Rotate3D from '@com/Rotate3D/index'
 import './index.less';
 
 const Detail = (props={}) => {
@@ -33,6 +34,7 @@ const Detail = (props={}) => {
         <div className='detail_page'>
             <Header>{'详情'}</Header>
             <div className='wrap_content'>
+                <Rotate3D />
                 <div onClick={()=>{
                    dispath({data: 'React'})
                  }}>{state.data}</div>

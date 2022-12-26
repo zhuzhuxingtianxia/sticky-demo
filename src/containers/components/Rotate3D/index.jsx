@@ -2,12 +2,23 @@
     3D水平旋转动画
     direction: 'front'|'back'|'left'|'right'|'up'|'down'
 */
-import React from "react";
+import React,{ useState, useMemo  } from "react";
 import "./index.less";
+
+const Directions = ['front', 'back', 'left', 'right', 'up', 'down']
 
 const Rotate3D = (props)=> {
 
     const {
+        sources = [
+            require("@config/source/1.png"),
+            require("@config/source/1.png"),
+            require("@config/source/2.png"),
+            require("@config/source/2.png"),
+            require("@config/source/3.png"),
+            require("@config/source/3.png"),
+        ],
+        /*
         sources = [
             {
                 source:require("@config/source/pic_b.png"),
@@ -34,13 +45,30 @@ const Rotate3D = (props)=> {
                 direction: 'down'
             }
         ]
+        */
     } = props
+
+    const list = useMemo(()=>{
+        const items = sources.map((item,index)=> {
+            if(Directions.length > index) {
+                if(typeof item == 'object') {
+                    return item
+                }
+                return {
+                    source: item,
+                    direction:Directions[index]
+                }
+            }
+            return null
+            
+        })
+        return items
+    },[sources])
 
     return (
         <div className="rotate-3d" style={props.style}>
             {
-                sources && 
-                sources.map((item,index) => {
+                list.map((item,index) => {
                     return (
                         <div className={`face-6 ${item.direction}`} 
                             style={item.style?item.style:{}} 
