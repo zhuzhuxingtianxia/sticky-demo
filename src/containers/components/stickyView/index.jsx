@@ -13,7 +13,7 @@ let _offsetY = {}
 
 const StickyView = (props) => {
     
-    const { datas=[],page=4,stickyKey='stickyKey' } = props
+    const { datas=[],stickyKey='stickyKey' } = props
 
     const cacheActiveIndex = cacheActiveObjc[stickyKey]
     if (cacheActiveIndex === undefined) {
@@ -56,7 +56,7 @@ const StickyView = (props) => {
         }
 
         return ()=> {
-            if (window.appHistory.acction == 'POP') {
+            if (window.appHistory?.action == 'POP') {
                 cacheActiveObjc[stickyKey] = undefined
                 _offsetY[stickyKey] = 0
             }
@@ -64,7 +64,8 @@ const StickyView = (props) => {
 
     },[])
 
-    const onTabClick = (tab,index) => {
+    const onTabClick = (key) => {
+        const index = datas.findIndex(item => item.key == key) ?? 0
         isClick = true
         if(timeout) {
             clearTimeout(timeout)
@@ -173,11 +174,16 @@ const StickyView = (props) => {
                 { props.header }
                 <div className={'card_modules'}>
                     <div className={'card_sticky'}>
-                        <Tabs tabs={datas}
-                            page={selectPage}
-                            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={page}/>}
-                            onTabClick={onTabClick}
-                        ></Tabs>
+                        <Tabs
+                            activeKey={datas[selectPage].key}
+                            onChange={onTabClick}
+                        >
+                        {
+                            datas.map((item,index)=> {
+                                return <Tabs.Tab title={item.title} key={item.key} />
+                            })
+                        }
+                        </Tabs>
                     </div>
                     <div className={'card_modules__content'} 
                         id={'content'}

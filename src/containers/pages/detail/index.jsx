@@ -1,10 +1,12 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Header } from "@com";
 import './index.less';
 
 const Detail = (props={}) => {
-
+    
+    const navigate = useNavigate()
     const [state, dispath] = useReducer((state,action)=> {
         //数据处理
         if(JSON.stringify(state) != JSON.stringify(action)) {
@@ -23,11 +25,7 @@ const Detail = (props={}) => {
     useEffect(()=>{
 
         return ()=>{
-            if (props.history.action === 'POP') {
-                console.log('卸载界面')
-            }else {
-                console.log('界面跳转')
-            }
+            console.log('卸载界面')
         }
     },[])
 
@@ -39,7 +37,7 @@ const Detail = (props={}) => {
                    dispath({data: 'React'})
                  }}>{state.data}</div>
                 <div onClick={()=>{
-                    props.history.goBack()
+                    navigate(-1)
                  }}>goBack</div>
             </div>
             

@@ -1,11 +1,12 @@
 import React from 'react'
-import { NavBar, Icon } from "antd-mobile";
+import { NavBar } from "antd-mobile";
+import { CloseOutline, LeftOutline,MoreOutline } from 'antd-mobile-icons'
 import NavStacky from './navStacky'
 import './index.less'
 
 class Header extends React.Component {
     static defaultProps = {
-        mini: true,
+        mini: false,
         onlyClose:false
     }
     constructor(props){
@@ -31,18 +32,16 @@ class Header extends React.Component {
             window.appClose && window.appClose()
         }
     }
+    onBack = ()=> {
+        if(this.props.onLeftClick){
+            this.props.onLeftClick()
+        }else {
+            window.history?.back()
+        }
+         
+    }
     popOver = () => {
         console.log('popOver')
-    }
-
-    iconOffset = () => {
-        const w = document.documentElement.clientWidth;
-        let style = { marginLeft: 15 }
-        if(w < 375) {
-            style = { marginLeft: 5 }
-        }
-
-        return style;
     }
 
     rightContent = () => {
@@ -55,11 +54,11 @@ class Header extends React.Component {
                     {
                         this.props.onlyClose === false && 
                         <>
-                            <Icon type='ellipsis' size='sm' color={'#000'} onClick={this.popOver}/>
+                            <MoreOutline  fontSize={24} color={'#000'} onClick={this.popOver}/>
                             <div style={{background:'gainsboro',width:1,height:20,margin:'0 5px'}}></div>
                         </>
                     }
-                    <Icon type='cross-circle' size='sm' color={'#000'} onClick={this.appClose}/>
+                    <CloseOutline fontSize={20} color={'#000'} onClick={this.appClose}/>
                 </div>
             )
             rightContent = [com]
@@ -70,22 +69,21 @@ class Header extends React.Component {
     }
     leftContent = () => {
         return (
-            <div style={{whiteSpace:'nowrap'}}>
+            <div className='left-content'>
                 {
                     (this.state.isRootRoute === false || !this.props.mini) &&
-                    <Icon style={{marginLeft:0}}
-                        type={'left'}
-                        size={'lg'}
+                    <LeftOutline style={{marginLeft:0}}
+                        fontSize={22}
                         color={'rgba(0,0,0,0.65)'}
-                        onClick={this.props.onLeftClick || window.appHistory.goBack}
+                        onClick={this.onBack}
                     />
                 }
                 {
                     !this.props.mini &&
-                    <Icon type={'cross'}
-                        size={'lg'}
+                    <CloseOutline
+                        fontSize={24}
                         color={'rgba(0,0,0,0.65)'}
-                        style={ this.iconOffset() }
+                        style={{marginLeft: 15}}
                         onClick={this.appClose}
                     />
                 }
@@ -99,18 +97,18 @@ class Header extends React.Component {
                 {
                     this.props.mini ?
                     <NavBar
-                        mode={'light'}
-                        icon={ this.leftContent() }
-                        rightContent={ this.rightContent() }
+                        back={null}
+                        left={ this.leftContent() }
+                        right={ this.rightContent() }
                         className={'headerComponent__mini'}
                         style={{fontWeight:'bold'}}
                     >
                         { this.props.title || this.props.children }
                     </NavBar> :
                     <NavBar
-                        mode={'light'}
-                        icon={ this.leftContent() }
-                        rightContent={ this.rightContent() }
+                        back={null}
+                        left={ this.leftContent() }
+                        right={ this.rightContent() }
                         className={'headerComponent__navBar'}
                         style={{fontWeight:'bold'}}
                     >

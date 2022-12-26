@@ -15,37 +15,29 @@
                 z-index: 1998;
                 top: 0;
                 background: white;
-                padding: 5px 0;
                 display: flex;
                 flex-direction: row;
                 overflow-x: auto;
                 &::-webkit-scrollbar {
                     display: none;
                 }
-                .am-tabs-tab-bar-wrap {
-                    .am-tabs-default-bar {
-                        padding: 0 5px;
-                        .am-tabs-default-bar-content {
-
-                            .am-tabs-default-bar-tab {
-                                overflow: hidden;
-                                white-space: nowrap;
-                                color: #22385a;
-                                font-size: 16px;
-                                &::after {
-                                    content: none;
-                                }
-                                &.am-tabs-default-bar-tab-active {
-                                    color: #0c59ff;
-                                    font-weight: bold;
-                                    font-size: 18px;
+                .adm-tabs {
+                    .adm-tabs-header {
+                        .adm-tabs-tab-list {
+                            .adm-tabs-tab-line {
+                                background: #0c59ff;
+                            }
+                            .adm-tabs-tab-wrapper {
+                                .adm-tabs-tab {
+                                    color: #22385a;
+                                    font-size: 16px;
+                                    &.adm-tabs-tab-active {
+                                        color: #0c59ff;
+                                        font-weight: bold;
+                                        font-size: 18px;
+                                    }
                                 }
                             }
-
-                            .am-tabs-default-bar-underline {
-                                border:1px #0c59ff solid;
-                            }
-
                         }
                     }
                 }

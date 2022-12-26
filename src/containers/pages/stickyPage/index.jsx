@@ -83,7 +83,8 @@ const StickyPage = (props) => {
 
     const [selectPage,setSelectPage] = useState(0)
 
-    const onTabClick = (tab,index) => {
+    const onTabClick = (key) => {
+        const index = ftDatas.findIndex(item => item.key == key) ?? 0
         isClick = true
         if(timeout) {
             clearTimeout(timeout)
@@ -174,11 +175,16 @@ const StickyPage = (props) => {
                 <div className={'card_header'}></div>
                 <div className={'card_modules'}>
                     <div className={'card_sticky'}>
-                        <Tabs tabs={ftDatas}
-                            page={selectPage}
-                            renderTabBar={props => <Tabs.DefaultTabBar {...props} page={4}/>}
-                            onTabClick={onTabClick}
-                        ></Tabs>
+                        <Tabs
+                            activeKey={ftDatas[selectPage].key}
+                            onChange={onTabClick}
+                        >
+                        {
+                            ftDatas.map((item,index)=> {
+                                return <Tabs.Tab title={item.title} key={item.key} />
+                            })
+                        }
+                        </Tabs>
                     </div>
                     <div className={'card_modules__content'} 
                         id={'content'}

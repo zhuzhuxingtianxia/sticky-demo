@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import loadable from "@loadable/component";
 
 import NoMatch from "@com/error/index";
@@ -22,13 +22,13 @@ const StickyPage = loadable(() => import('@pages/stickyPage/index'),{
 const Router = (props) => {
     // debugger
     return (
-        <Switch>
-            <Route exact strict path="/" component={Home}/>
-            <Route exact path="/detail" component={Detail}/>
-            <Route exact path="/stickyPage" component={StickyPage}/>
+        <Routes>
+            <Route path="/" element={<Home/>}/>
+            <Route path="/detail" element={<Detail/>}/>
+            <Route path="/stickyPage" element={<StickyPage/>}/>
 
-            <Route component={NoMatch}/>
-        </Switch>
+            <Route element={<NoMatch />}/>
+        </Routes>
     )
 };
 

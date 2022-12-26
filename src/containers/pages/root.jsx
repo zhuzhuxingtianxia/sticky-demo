@@ -1,7 +1,7 @@
 import React,{ Fragment } from 'react';
-import Router from "@config/Router";
+import Router from "../../config/Router";
 
-class RootCompent extends React.Component {
+class Root extends React.Component {
 
     render(){
         return (
@@ -12,4 +12,4 @@ class RootCompent extends React.Component {
     }
 }
 
-export default RootCompent;
+export default Root;

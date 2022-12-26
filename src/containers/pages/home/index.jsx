@@ -1,8 +1,8 @@
-import React, { useEffect, 
+import React, { /*useEffect, 
     useReducer, useState, 
     useContext, useCallback,
-     useLayoutEffect, useMemo } from 'react';
-import { useHistory } from "react-router-dom";
+useLayoutEffect, useMemo */} from 'react';
+import { useNavigate } from "react-router-dom";
 import { Header } from "@com";
 import StickyView from '../../components/stickyView/index'
 import HeaderBanner from '../headerBanner/index'
@@ -79,10 +79,10 @@ const ftDatas = [
 ]
 
 const Home = (props={}) => {
-    const history = useHistory()
+    const navigate = useNavigate()
 
     const onClickDetail = ()=> {
-        history.push('/detail')
+        navigate('/detail')
     }
 
     return (
@@ -92,9 +92,14 @@ const Home = (props={}) => {
                 <StickyView 
                     datas={ftDatas}
                     header={
-                        <HeaderBanner onScrollEnd={()=>{
-                            history.push('/stickyPage')
-                        }}/>
+                        <HeaderBanner 
+                            onItemClick={()=>{
+                                navigate('/stickyPage')
+                            }}
+                            onScrollEnd={()=>{
+                                navigate('/stickyPage')
+                            }}
+                        />
                     }
                     renderItem={(item,idx) => {
                         return (

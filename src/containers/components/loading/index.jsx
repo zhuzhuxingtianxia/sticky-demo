@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator } from "antd-mobile";
+import { SpinLoading } from "antd-mobile";
 
 export default class LoadingPage extends React.Component {
     static defaultProps = {
@@ -8,12 +8,8 @@ export default class LoadingPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <ActivityIndicator
-                    toast
-                    text={'加载中...'}
-                    animating={this.props.loading}
-                />
+            <div className='loading-page'>
+                <SpinLoading style={{ '--size': '32px' }} />
             </div>
         )
     }
