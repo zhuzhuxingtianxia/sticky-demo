@@ -1,0 +1,88 @@
+
+.adm-modal {
+    .adm-mask {
+        overflow: hidden;
+    }
+    .adm-modal-wrap {
+        .adm-modal-body {
+            .adm-modal-content {
+                padding-bottom: 0;
+            }
+            //adm-modal-footer下布局修改需谨慎，防止影响alert.show的布局
+            .adm-modal-footer {
+                &:not(.adm-modal-footer-empty) {
+                    padding: 9px 0;
+                    margin: 15px 15px 0;
+                    border-top: #D8D8D8 solid 0.5px;
+                }
+                
+                &.adm-space-vertical {
+                    flex-direction: row;
+                    .adm-space-item {
+                        flex: 1;
+                        margin-bottom: 0;
+                        padding: 2.5px 0;
+                        border-right: #D8D8D8 solid 0.5px;
+                        &:last-child {
+                            border-right: initial;
+                        }
+                    }
+                }
+                .adm-modal-button {
+                    font-size: 15px;
+                }
+            }
+
+        }
+    }
+}
+
+.alert-body{
+    display: flex;
+    flex-direction: column;
+
+    .alert-title {
+        font-family: PingFangSC-Semibold;
+        color: #333;
+        font-size: 16px;
+        text-align: center;
+        text-overflow: ellipsis;
+        margin-bottom: 15px;
+    }
+
+    .alert-content {
+        margin-bottom: 10px;
+    }
+
+    .alert-buttons {
+        display: flex;
+        flex-direction: row;
+        border-top: #D8D8D8 solid 0.5px;
+        margin-top: 10px;
+        >div {
+            flex: 1;
+            margin-top: 5px;
+            text-align: center;
+            font-size: 15px;
+            color: #0256FF;
+            min-height: 30px;
+            line-height: 30px;
+            border-right: #D8D8D8 solid 1px;
+
+            &:active {
+                opacity: 0.8;
+            }
+            &:nth-child(1) {
+                color: #999999;
+            }
+            &:nth-child(2) {
+                color: #CAA846;
+            }
+            &:last-child {
+                border-right: initial;
+            }
+
+        }
+
+    }
+}

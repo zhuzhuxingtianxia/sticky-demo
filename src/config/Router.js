@@ -16,6 +16,9 @@ const StickyPage = loadable(() => import('@pages/stickyPage/index'),{
     fallback:<Loading />
 });
 
+const Lottery = loadable(() => import('@pages/lottery/index'),{
+    fallback:<Loading />
+});
 
 
 
@@ -26,7 +29,7 @@ const Router = (props) => {
             <Route path="/" element={<Home/>}/>
             <Route path="/detail" element={<Detail/>}/>
             <Route path="/stickyPage" element={<StickyPage/>}/>
-
+            <Route path="/lottery" element={<Lottery/>}/>
             <Route element={<NoMatch />}/>
         </Routes>
     )
