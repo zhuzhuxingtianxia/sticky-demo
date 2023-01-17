@@ -11,8 +11,13 @@ class LoadingState {
         }
 
         if(this.animating.length == 1){
-            Toast.loading(this.loadText, 45, () => {
-                console.log('Load complete!')
+            Toast.show({
+                icon: 'loading',
+                content: this.loadText,
+                duration: 45,
+                afterClose: ()=> {
+                    console.log('Load complete!')
+                }
             })
         }
     }
@@ -20,7 +25,7 @@ class LoadingState {
     reduceAnimating = ()=> {
         this.animating.shift()
         if(this.animating.length <= 0){
-            Toast.hide()
+            Toast.clear()
             this.loadText = '加载中...'
         }
     }

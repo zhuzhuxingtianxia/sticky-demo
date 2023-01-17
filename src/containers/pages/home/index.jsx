@@ -2,7 +2,7 @@ import React, { /*useEffect,
     useReducer, useState, 
     useContext, useCallback,
 useLayoutEffect, useMemo */} from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, createSearchParams } from "react-router-dom";
 import { Header } from "@com";
 import StickyView from '../../components/stickyView/index'
 import HeaderBanner from '../headerBanner/index'
@@ -82,7 +82,46 @@ const Home = (props={}) => {
     const navigate = useNavigate()
 
     const onClickDetail = ()=> {
-        navigate('/detail')
+        const type = 4
+        switch (type) {
+            case 0:
+                //路由替换
+                navigate('/detail',{replace: true})
+                break;
+            case 1:
+                //跳转无参数
+                navigate('/detail')
+                break;
+            case 2:
+                //跳转传参方式一
+                navigate('/detail?title=详情传参方式一')
+                break;
+            case 3:
+                //跳转传参方式二
+                navigate({
+                    pathname:'/detail',
+                    callback: (data) => {
+                        //无法传递问题
+                        console.log(data)
+                    },
+                    search: `?${createSearchParams({title: '详情传参方式二'})}`
+                })
+                break;
+            case 4:
+                //跳转传参方式三
+                navigate('/detail', {
+                    callback: ()=>{}, //无法传递问题
+                    state: {title: '详情传参方式三', callback: ()=>{} }
+                })
+                break;
+            case 5:
+                //跳转传参方式四(restful格式传参数)
+                navigate('/detail/restful格式传参数')
+                break;
+            default:
+                break;
+        }
+        
     }
 
     return (

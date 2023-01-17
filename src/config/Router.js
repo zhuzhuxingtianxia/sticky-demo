@@ -27,7 +27,10 @@ const Router = (props) => {
     return (
         <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/home" element={<Home/>}/>
             <Route path="/detail" element={<Detail/>}/>
+            {/* restful格式传参数 */}
+            <Route path="/detail/:title" element={<Detail/>}/>
             <Route path="/stickyPage" element={<StickyPage/>}/>
             <Route path="/lottery" element={<Lottery/>}/>
             <Route element={<NoMatch />}/>

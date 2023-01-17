@@ -4,14 +4,17 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Router, unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { createBrowserHistory } from "history";
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const history = createBrowserHistory({ window });
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <BrowserRouter >
     <App />
   </BrowserRouter>
 );

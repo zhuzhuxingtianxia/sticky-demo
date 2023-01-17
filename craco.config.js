@@ -4,6 +4,7 @@ const resolve = pathname => path.resolve(__dirname, pathname)
 
 module.exports = {
   devServer: {
+    port: 3030,
     proxy: {
         '/proxyStg1': {
             target: 'https://api.stg1.com.cn/',

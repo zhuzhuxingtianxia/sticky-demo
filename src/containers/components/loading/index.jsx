@@ -8,7 +8,7 @@ export default class LoadingPage extends React.Component {
 
     render() {
         return (
-            <div className='loading-page'>
+            <div className='loading-page' style={{width: '100%',height:'100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <SpinLoading style={{ '--size': '32px' }} />
             </div>
         )

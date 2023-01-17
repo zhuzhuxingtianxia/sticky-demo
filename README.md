@@ -16,7 +16,7 @@ npm install antd-mobile --save
 npm i jquery --save
 ```
 
-## 配置
+## 配置（废弃）
 ```
 npm install react-app-rewired customize-cra --save-dev
 ```
@@ -28,6 +28,20 @@ npm install babel-plugin-import --save-dev
 ```
 修改`config-overrides.js`文件
 
+## 配置
+
+```
+npm install @craco/craco
+```
+修改`package.json`文件:
+```
+"scripts": {
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test"
+},
+```
+添加`craco.config.js`用于修改默认配置
 
 ## npm start
 
@@ -58,3 +72,62 @@ That will permanently disable this message but you might encounter other issues.
 
 2. Tabs依赖于`antd-mobile`，界面一行item的多少则是固定写死的，如何设置动态显示item的数量呢？
 
+
+## 如何在类组件中使用 react-router-dom V6
+
+方案一:
+```
+//Index.js
+import {BrowserRouter, Routes, Route } from "react-router-dom"
+class Index extends React.Component{
+    render() {
+        return (
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/page1" element={<NavigateComponent element={Page1} />} />
+                    <Route path="/page2" element={<NavigateComponent element={Page2} />} />
+                </Routes>
+            </BrowserRouter>
+        );
+    }
+}
+
+/*NavigateComponent.js*/
+import {useNavigate} from "react-router-dom"
+function NavigateComponent(props){
+    const navigate = useNavigate()
+    return <div>
+        <props.element navigate={navigate} />
+    </div>
+}
+
+//Page1.js使用
+this.props.navigate("/page2")
+```
+
+方案二：
+```
+//withRouter.tsx
+import React from "react";
+import { NavigateFunction, useLocation, useNavigate, useParams } from "react-router";
+
+export interface RoutedProps<Params = any, State = any> {
+    location: State;
+    navigate: NavigateFunction;
+    params: Params;
+}
+
+
+export function withRouter<P extends RoutedProps>( Child: React.ComponentClass<P> ) {
+    return ( props: Omit<P, keyof RoutedProps> ) => {
+        const location = useLocation();
+        const navigate = useNavigate();
+        const params = useParams();
+        return <Child { ...props as P } navigate={ navigate } location={ location } params={ params }/>;
+    }
+}
+
+//使用
+export default withRouter(Page1);
+
+```
