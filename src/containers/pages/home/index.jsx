@@ -126,7 +126,13 @@ const Home = (props={}) => {
 
     return (
         <div className='homepage'>
-            <Header>{'商品分类商品分类商品分类s首页'}</Header>
+            <Header rightContent={
+                <span onClick={()=>{
+                    navigate('/lottery')
+                }}>活动</span>
+            }>
+                {'商品分类首页'}
+            </Header>
             <div className='wrap_content'>
                 <StickyView 
                     datas={ftDatas}
