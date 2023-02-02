@@ -131,3 +131,149 @@ export function withRouter<P extends RoutedProps>( Child: React.ComponentClass<P
 export default withRouter(Page1);
 
 ```
+
+## 样式模版及适配说明
+
+@mixin的使用及用法
+
+* @mixin 混入指令允许包含所有的css和sass中被允许使用的东西，还可以携带参数。
+
+* @include 指令可以将混入（mixin）引入到文档中。
+
+```
+@mixin button($width, $height, $fontSize) {
+    border-radius: $height/2;
+    border-radius: $height/2;
+    width: $width;
+    height: $height;
+    line-height: $height;
+    font-size: $fontSize;
+    box-sizing: content-box;
+    text-align: center;
+}
+// 参数可设置默认值
+@mixin deepButton($width, $height, $fontSize: 16px) {
+    @include button($width, $height, $fontSize);
+    background-image: linear-gradient(120deg, #D4BA77 0%, #FFEAB4 100%);
+    border: none 0px;
+    color: #624C16;
+}
+
+//混入设置可变参数
+@mixin box-shadow($shadows...) {
+      -moz-box-shadow: $shadows;
+      -webkit-box-shadow: $shadows;
+      box-shadow: $shadows;
+}
+ 
+.shadows {
+  @include box-shadow(0px 4px 5px red, 2px 6px 10px blue);
+}
+
+//或
+@mixin box-shadow($top, $left, $blur, $size, $color) {
+   -webkit-box-shadow: $top $left $blur $size $color;
+   -moz-box-shadow: $top $left $blur $size $color;
+   box-shadow: $top $left $blur $size $color;
+}
+.box {
+    @include box-shadow(2px,2px,5px,0, rgba(0,0,0,0.6));
+}
+
+//浏览器前缀使用混入
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+ 
+.myBox {
+  @include transform(rotate(20deg));
+}
+
+```
+
+```
+//全局样式设置
+html {
+  font-size: 20px;
+  width: 100%;
+  color: #666;
+  height: 100%;
+}
+//全局样式设置
+body {
+  font-family: "PingFang SC", "HanHei SC", "microsoft yahei", Arial;
+  //PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  margin: auto;
+  font-weight: normal;
+  font-size: 2.8 * $rem;
+}
+
+button,
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  appearance: none;
+  cursor: pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  appearance: none;
+}
+
+// 修改input的placeholder的颜色
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+select {
+  appearance: none;
+}
+
+em,
+i {
+  font-weight: normal;
+  font-style: normal;
+}
+
+//统配设置
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+//设置disabled属性的元素为灰色
+[disabled] {
+    filter: grayscale(100%);
+}
+
+//兼容性设置
+/*
+   constant()和 env()，是IOS11新增特性，有4个预定义变量：
+    safe-area-inset-left：安全区域距离左边边界的距离
+    safe-area-inset-right：安全区域距离右边边界的距离
+    safe-area-inset-top：安全区域距离顶部边界的距离
+    safe-area-inset-bottom ：安全距离底部边界的距离
+
+    而constant()和env()函数有个必要的使用前提，H5网页设置viewport-fit=cover的时候才生效，小程序里的viewport-fit默认是cover。
+    先constant(兼容iOS<11.2)，再env(兼容ios>11.2)
+*/
+.container {
+    min-height: 100vh;
+    width: 100%;
+    padding-bottom: constant(safe-area-inset-bottom);
+    padding-bottom:  calc(10px + env(safe-area-inset-bottom));
+}
+
+ //兼容性设置 华为p40-780，iPhonex-812,iphonePlus-736
+@media screen and (min-height: 780px) {
+    &__navBar, &__mini {
+        padding-top: 44px;
+    }
+}
+
+```
