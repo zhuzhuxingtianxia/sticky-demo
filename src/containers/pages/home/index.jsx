@@ -2,7 +2,7 @@ import React, { /*useEffect,
     useReducer, useState, 
     useContext, useCallback,
 useLayoutEffect, useMemo */} from 'react';
-import { useNavigate, createSearchParams } from "react-router-dom";
+import { useNavigate, createSearchParams, useLocation } from "react-router-dom";
 import { Header } from "@com";
 import StickyView from '../../components/stickyView/index'
 import HeaderBanner from '../headerBanner/index'
@@ -80,9 +80,9 @@ const ftDatas = [
 
 const Home = (props={}) => {
     const navigate = useNavigate()
-
+    
     const onClickDetail = ()=> {
-        const type = 4
+        const type = 3
         switch (type) {
             case 0:
                 //路由替换
@@ -94,7 +94,7 @@ const Home = (props={}) => {
                 break;
             case 2:
                 //跳转传参方式一
-                navigate('/detail?title=详情传参方式一')
+                navigate(`/detail?title=详情传参方式一`)
                 break;
             case 3:
                 //跳转传参方式二
