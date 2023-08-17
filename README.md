@@ -277,3 +277,27 @@ i {
 }
 
 ```
+
+##  styled-components
+
+```
+npm install styled-components
+```
+使用：
+```
+import styled from 'styled-components';
+
+const Button = styled.button`
+  /* 样式属性 */
+  color: white;
+  background-color: blue;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+`;
+const CustomButton = styled(Button)`
+  /* 修改的样式属性 */
+  background-color: ${props => props.isPrimary ? 'blue' : 'green'};
+`;
+
+```

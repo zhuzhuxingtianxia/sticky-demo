@@ -1,0 +1,89 @@
+
+.digital-clock {
+    height: 100vh;
+    display:flex;
+    flex:1;
+    flex-direction: column;
+    .container {
+        position: relative;
+        flex: 1;
+        .clock-dev {
+            display: flex;
+            flex-direction: column;
+            margin: 40px 20px;
+            text-align: center;
+            //https://segmentfault.com/a/1190000043674518
+            > span {
+                font-size: 20px;
+                font-weight: 500;
+                margin: 20px;
+            }
+            .span1::after {
+                counter-reset: num var(--num);
+                content: counter(num);
+            }
+            .span1:hover::after {
+                --num: 59;
+            }
+
+            @property --num2 {
+                syntax: '<integer>';
+                inherits: false;
+                initial-value: 0;
+            }
+            .span2::after {
+                counter-reset: num2 var(--num2);
+                content: counter(num2);
+                transition: 1s --num2;
+            }
+            .span2:hover::after {
+                --num2: 59;
+            }
+
+
+            @property --num3 {
+                syntax: '<integer>';
+                inherits: false;
+                initial-value: 0;
+            }
+            .span3::after {
+                counter-reset: num3 var(--num3);
+                content: counter(num3);
+            }
+            
+            .span3 {
+                animation: an-num3 1s infinite steps(10);
+            }
+            @keyframes an-num3 {
+                to {
+                    --num3: 10;
+                }
+            }
+
+
+            //时钟
+            @keyframes minitus {
+                to {
+                    --m: 59
+                }
+            }
+            @keyframes seconds {
+                to {
+                    --s: 59
+                }
+            }
+            @keyframes ms {
+                to {
+                    --ms: 99
+                }
+            }
+
+            .span10 {
+                counter-reset: minitus var(--m) seconds var(--s) ms var(--ms);
+                animation: minitus 3600s timing-function delay iteration-count direction fill-mode;
+            }
+
+        }
+        
+    }
+}

@@ -1,5 +1,5 @@
 import React,{ Fragment } from 'react';
-import Router from "../../config/Router";
+import Router from "@config/Router";
 
 class Root extends React.Component {
 

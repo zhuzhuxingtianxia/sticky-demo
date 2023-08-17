@@ -20,6 +20,9 @@ const Lottery = loadable(() => import('@pages/lottery/index'),{
     fallback:<Loading />
 });
 
+const DigitalClock = loadable(() => import('@pages/digitalClock'),{
+    fallback:<Loading />
+});
 
 
 const Router = (props) => {
@@ -33,6 +36,7 @@ const Router = (props) => {
             <Route path="/detail/:title" element={<Detail/>}/>
             <Route path="/stickyPage" element={<StickyPage/>}/>
             <Route path="/lottery" element={<Lottery/>}/>
+            <Route path="/digitalClock" element={<DigitalClock/>}/>
             <Route element={<NoMatch />}/>
         </Routes>
     )
