@@ -60,21 +60,36 @@
                 }
             }
 
+            @property --m {
+                syntax: '<integer>';
+                inherits: false;
+                initial-value: 0;
+            }
+            @property --s {
+                syntax: '<integer>';
+                inherits: false;
+                initial-value: 0;
+            }
+            @property --ms {
+                syntax: '<integer>';
+                inherits: false;
+                initial-value: 0;
+            }
 
             //时钟
             @keyframes minitus {
                 to {
-                    --m: 59
+                    --m: 59;
                 }
             }
             @keyframes seconds {
                 to {
-                    --s: 59
+                    --s: 59;
                 }
             }
             @keyframes ms {
                 to {
-                    --ms: 99
+                    --ms: 99;
                 }
             }
 

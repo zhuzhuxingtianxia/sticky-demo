@@ -1,14 +1,17 @@
 
 .Tabs {
+    position: relative;
     display: flex;
     flex-direction: column;
     &-bar {
         display: -webkit-box;
-        overflow: auto;
+        overflow-x: auto;
         padding-top: 0.4rem;
         &::-webkit-scrollbar {
             width: 0;
             height: 0;
+            display: none;
+            background: transparent;
         }
         &.sticky {
             position: sticky;
@@ -54,18 +57,14 @@
     }
     &-content {
         display: flex;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        flex-direction: row;
         width: 100%;
-        >div {
-            flex-shrink: 0;
+
+        .tabpanel {
+            flex: none;
             width: 100%;
-            opacity: 0;
-            height: 0;
+            outline: none;
             &.tabpanel-active {
-                opacity: 1;
-                height: inherit;
+                position: relative;
             }
         }
         

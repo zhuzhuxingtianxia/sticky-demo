@@ -4,6 +4,7 @@ import loadable from "@loadable/component";
 
 import NoMatch from "@com/error/index";
 import Loading from '@com/loading/index';
+import * as TH from '@pages/threejs/index';
 
 const Home = loadable(() => import('@pages/home/index'),{
     fallback:<Loading />
@@ -37,6 +38,8 @@ const Router = (props) => {
             <Route path="/stickyPage" element={<StickyPage/>}/>
             <Route path="/lottery" element={<Lottery/>}/>
             <Route path="/digitalClock" element={<DigitalClock/>}/>
+            {/* threejs */}
+            <Route path="/threejs/index" element={<TH.Index/>}/>
             <Route element={<NoMatch />}/>
         </Routes>
     )

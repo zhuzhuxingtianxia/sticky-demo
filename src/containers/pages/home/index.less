@@ -18,5 +18,37 @@
             justify-content: center;
             align-items: center;
         }
+        .fiter0 {
+            filter: sepia(1) saturate(200%) hue-rotate(295deg);
+        }
+        //将图像转为棕褐色，值在 0% 到 100% 之间，值为 100% 则完全是深褐色的
+        .fiter1 {
+            filter: sepia(50%);
+        }
+        //超饱和或去饱和输入的图像，值为0% 则是完全不饱和，完全转为灰度图像，100% 展示原图，大于100% 则有更高的饱和度。
+        .fiter2 {
+            filter: saturate(300%);
+        }
+        // 改变图整体色调，angle设定图像会被调整的色环角度值。值为0deg展示原图，大于360deg相当于又绕一圈
+        .fiter3 {
+            filter: hue-rotate(90deg);
+        }
+        // 反转图像颜色,值在 0% 和 100% 之间,100% 的价值是完全反转
+        .fiter4 {
+            filter: invert(100%);
+        }
+        // 让图像更明亮或更暗淡，0% 将创建全黑图像，100% 展示原图
+        .fiter5 {
+            filter: brightness(80%);
+        }
+        // 增加或减少图像的对比度，值是0%图像全灰图像，没有对比度。100% 展示原图，大于100%展示对比度更高的图片效果。
+        .fiter6 {
+            filter: contrast(150%);
+        }
+        // 改变图像透明度，值在 0% 和 100% 之间
+        .fiter7 {
+            filter: opacity(50%);
+        }
+        
     }
 }

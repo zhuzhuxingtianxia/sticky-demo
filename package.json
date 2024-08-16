@@ -3,23 +3,27 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^7.0.0",
     "@loadable/component": "^5.15.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
+    "antd": "^5.16.4",
     "antd-mobile": "^5.27.0",
     "antd-mobile-icons": "^0.3.0",
     "axios": "^1.2.1",
     "classnames": "^2.3.2",
-    "craco-less": "^2.0.0",
     "history": "^5.3.0",
     "jquery": "^3.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.5",
-    "react-scripts": "5.0.1",
+    "react-scripts": "^5.0.1",
+    "three": "^0.167.1",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "craco-less": "^3.0.1"
   },
   "scripts": {
     "start": "craco start",
